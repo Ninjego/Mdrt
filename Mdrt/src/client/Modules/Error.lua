@@ -1,9 +1,6 @@
-local module = {
+return {
     name = "error";
-
-    runClient = function(...)
+    runClient = function(self, ...)
         error(...)
     end 
 }
-
-return module

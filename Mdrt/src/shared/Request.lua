@@ -25,13 +25,13 @@ function Request:run(request)
     if(runService:IsClient()) then
         local module = modules:getModule(request.name)
         if module and type(module.runClient) == "function" then
-            module:runClient(request.args)
+            local typedArgs = modules:convertArguments(module.args, request.args)
+            module:runClient(table.unpack(typedArgs))
             return true
         else
             error("Invalid module or missing runClient function.")
-                return false
+            return false
         end
-        return false
     end
 end
 
